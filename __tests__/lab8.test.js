@@ -54,10 +54,10 @@ describe('Basic user flow for Website', () => {
     // Once you have the innerText property, use innerText['_remoteObject'].value to get the text value of it
     const productItem = await page.$('product-item');
     const shadowRoot = await productItem.getProperty('shadowroot');
-    const button = await shadowRoot.$('button');
+    const button =  await shadowRoot.$('button');
     await button.click();
     const innerText = await button.getProperty('innerText');
-    expect(innerText['_remoteObject'].value).toMatch(/Remove from Cart/);
+    expect(innerText['_remoteObject'].value).toMatch('Remove from Cart');
 
   
   }, 2500);
@@ -72,13 +72,13 @@ describe('Basic user flow for Website', () => {
     // Check to see if the innerText of #cart-count is 20
     const productItems = await page.$$('product-item');
     for(let i = 0; i<productItems.length;i++){
-      let shadowRoot = await productItems[i].getProperty('shadowroot');
+      let shadowRoot = await productItems[i].getProperty('shadowRoot');
       let button = await shadowRoot.$('button');
       await button.click();
     }
     const cartCount = await page.$('#cart-count');
     const innerText = await cartCount.getProperty('innerText');
-    expect(innerText['_remoteObject'].value).toEqual(20);
+    expect(innerText['_remoteObject'].value).toEqual('20');
     
   }, 10000);
 
@@ -92,14 +92,14 @@ describe('Basic user flow for Website', () => {
     await page.reload();
     const productItems = await page.$$('product-item');
     for(let i = 0; i < productItems.length; i++){
-      let shadowRoot = await productItems[i].getProperty('shadowroot');
+      let shadowRoot = await productItems[i].getProperty('shadowRoot');
       let button = await shadowRoot.$('button');
       let innerText = await button.getProperty('innerText');
-      expect(innerText['_remoteObject'].value).toMatch(/Remove from Cart/);
+      expect(innerText['_remoteObject'].value).toMatch('Remove from Cart');
     }
     const cartCount = await page.$('#cart-count');
     const innerTextCart = await cartCount.getProperty('innerText');
-    expect(innerTextCart['_remoteObject'].value).toEqual(20);
+    expect(innerTextCart['_remoteObject'].value).toEqual('20');
   }, 10000);
 
   // Check to make sure that the cart in localStorage is what you expect
@@ -122,13 +122,13 @@ describe('Basic user flow for Website', () => {
     // Once you have, check to make sure that #cart-count is now 0
     const productItems = await page.$$('product-item');
     for(let i = 0; i<productItems.length;i++){
-      let shadowRoot = await productItems[i].getProperty('shadowroot');
+      let shadowRoot = await productItems[i].getProperty('shadowRoot');
       let button = await shadowRoot.$('button');
       await button.click();
     }
     const cartCount = await page.$('#cart-count');
     const innerText = await cartCount.getProperty('innerText');
-    expect(innerText['_remoteObject'].value).toEqual(0);
+    expect(innerText['_remoteObject'].value).toEqual('0');
     
 
   }, 10000);
@@ -144,14 +144,14 @@ describe('Basic user flow for Website', () => {
     await page.reload();
     const productItems = await page.$$('product-item');
     for(let i = 0; i < productItems.length; i++){
-      let shadowRoot = await productItems[i].getProperty('shadowroot');
+      let shadowRoot = await productItems[i].getProperty('shadowRoot');
       let button = await shadowRoot.$('button');
       let innerText = await button.getProperty('innerText');
-      expect(innerText['_remoteObject'].value).toMatch(/Add to Cart/);
+      expect(innerText['_remoteObject'].value).toMatch('Add to Cart');
     }
     const cartCount = await page.$('#cart-count');
     const innerTextCart = await cartCount.getProperty('innerText');
-    expect(innerTextCart['_remoteObject'].value).toEqual(0);
+    expect(innerTextCart['_remoteObject'].value).toEqual('0');
   }, 10000);
 
   // Checking to make sure that localStorage for the cart is as we'd expect for the
